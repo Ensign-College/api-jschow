@@ -1,8 +1,16 @@
 const express = require('express'); // express makes APIs - connect frontend to database
+const Redis = require('redis'); // import Redis Class from library
+
+const redisClient = Redis.createClient({
+    url:`redis://localHost:6379`
+}); // 
 
 const app = express(); // create an express application
-
-app.listen(3000); // listen for web requests from the frontend and don't stop
+const port = 3000; // port number
+app.listen(port,()=>{
+    redisClient.connect(); // connects to the redis database
+    console.log(`API is listening on port: ${port}`)
+}); // listen for web requests from the frontend and don't stop
 
 const boxes = [
     {boxId:1},
