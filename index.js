@@ -19,7 +19,7 @@ app.listen(port,()=>{
 app.get('/boxes',(req,res)=>{
     let boxes = redisClient.json.get('boxes',{path:'$'}); // get the boxes
     // send the boxes to the browser
-    res.send(JSON.stringify(boxes));
+    res.send(JSON.stringify(boxes.value));
 });// return boxes to user
 
 console.log("Hello");
