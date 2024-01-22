@@ -16,10 +16,10 @@ app.listen(port,()=>{
 // 2 - function to return boxes
 // req = the request from the browser
 // res = the response to the browser
-app.get('/boxes',(req,res)=>{
-    let boxes = redisClient.json.get('boxes',{path:'$'}); // get the boxes
+app.get('/boxes', async (req,res)=>{
+    let boxes = await redisClient.json.get('boxes',{path:'$'}); // get the boxes
     // send the boxes to the browser
-    res.send(JSON.stringify(boxes.value));
+    res.send(JSON.stringify(boxes));
 });// return boxes to user
 
 console.log("Hello");
