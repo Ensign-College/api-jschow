@@ -17,6 +17,7 @@ app.listen(port,()=>{
 
 app.post('/boxes', async (req, res)=>{ // async means we will await promises
     const newBox = req.body;
+    newBox.id = await redisClient.json.arrLen('boxes','$') + 1; // auto choose ID; user shouldn't choose ID
     await redisClient.json.arrAppend('boxes','$',newBox); // saves JSON in redis
     res.json(newBox); // respond to user with new box
 });
