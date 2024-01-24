@@ -8,10 +8,18 @@ const redisClient = Redis.createClient({
 
 const app = express(); // create an express application
 const port = 3000; // port number
+
+app.use(bodyParser.json());
 app.listen(port,()=>{
     redisClient.connect(); // connects to the redis database
     console.log(`API is listening on port: ${port}`)
 }); // listen for web requests from the frontend and don't stop
+
+app.post('/boxes', async (req, res)=>{ // async means we will await promises
+    const newBox = req.body;
+    await redisClient.json.arrInsert('boxes','$',-1,JSON.stringify(newBox)); // saves JSON in redis
+    res.json(newBox); // respond to user with new box
+});
 
 // 1 - URL
 // 2 - function to return boxes
@@ -22,24 +30,5 @@ app.get('/boxes', async (req,res)=>{
     // send the boxes to the browser
     res.send(JSON.stringify(boxes)); // convert boxes to JSON string
 });// return boxes to user
-
-app.post('/boxes', async (req, res) => {
-    try {
-        // Assuming the request body contains information about the new box
-        const newBoxData = req.body; // Adjust this based on your actual data structure
-
-        // Add the new box to the existing list of boxes in the Redis database
-        let boxes = await redisClient.json.get('boxes', { path: '$' }) || []; // get existing boxes
-        boxes.push(newBoxData);
-
-        await redisClient.json.set('boxes', { path: '$', value: boxes }); // Update the boxes in the Redis database
-
-        // Send a success response to the browser
-        res.status(201).send("Box created successfully");
-    } catch (error) {
-        console.error("Error creating box:", error);
-        res.status(500).send("Internal Server Error"); // Send an error response to the browser
-    }
-});
 
 console.log("Hello");
