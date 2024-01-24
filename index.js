@@ -1,5 +1,6 @@
 const express = require('express'); // express makes APIs - connect frontend to database
 const Redis = require('redis'); // import Redis Class from library
+const bodyParser = require('body-parser');
 
 const redisClient = Redis.createClient({
     url:`redis://localHost:6379`
@@ -40,6 +41,5 @@ app.post('/boxes', async (req, res) => {
         res.status(500).send("Internal Server Error"); // Send an error response to the browser
     }
 });
-
 
 console.log("Hello");
