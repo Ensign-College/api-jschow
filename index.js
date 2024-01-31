@@ -7,7 +7,7 @@ const redisClient = Redis.createClient({
 }); // 
 
 const app = express(); // create an express application
-const port = 3000; // port number
+const port = 3001; // port number
 
 app.use(bodyParser.json());
 app.listen(port,()=>{
