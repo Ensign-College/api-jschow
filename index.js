@@ -36,7 +36,7 @@ app.post('/boxes', async (req, res)=>{ // async means we will await promises
 app.get('/boxes', async (req,res)=>{
     let boxes = await redisClient.json.get('boxes',{path:'$'}); // get the boxes
     // send the boxes to the browser
-    res.send(JSON.stringify(boxes)); // convert boxes to JSON string
+    res.send(boxes[0]); // convert boxes to JSON string
 });// return boxes to user
 
 console.log("Hello");
