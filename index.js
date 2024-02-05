@@ -1,6 +1,11 @@
 const express = require('express'); // express makes APIs - connect frontend to database
 const Redis = require('redis'); // import Redis Class from library
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const options = {
+    origin: 'http://localhost:3000' // allow our frontend to call this backend
+    }
 
 const redisClient = Redis.createClient({
     url:`redis://localHost:6379`
@@ -10,6 +15,8 @@ const app = express(); // create an express application
 const port = 3001; // port number
 
 app.use(bodyParser.json());
+app.use(cors(options)); // allow frontend to call backend
+
 app.listen(port,()=>{
     redisClient.connect(); // connects to the redis database
     console.log(`API is listening on port: ${port}`)
