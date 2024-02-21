@@ -60,7 +60,7 @@ const orderSchema = {
         const existingOrder = await redisClient.json.get(orderKey);
 
         if (existingOrder !== null) {
-            throw new Error(Order ${orderKey} already exists);
+            throw new Error(`Order ${orderKey} already exists`);
         }
 
         // Create the order data in Redis
