@@ -64,7 +64,7 @@ app.listen(port, () => {
   console.log(`API is listening on port: ${port}`); //template literal
 }); //listen for web requests form the frontend and don't stop () => console.log('listening at 3000')); // listen for requests on port 3000
 
-const Schema = require("./schema.json");
+//const Schema = require("./schema.json");
 
 const Ajv = require("ajv");
 const ajv = new Ajv();
