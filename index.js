@@ -45,7 +45,7 @@ const express = require("express"); // express makes APIs - connect frotend to d
 const Redis = require("redis"); //redis is a database, import the Redis class from the redis library
 const bodyParser = require("body-parser"); //body-parser is a library that allows us to read the body of a request
 const cors = require("cors"); //cors is a library that allows us to make requests from the frontend to the backend
-const { addOrder, getOrder } = require("./services/orderservice.js"); //import the addOrder function from the orderservice.js file
+const { addOrder, getOrder } = require("./services/orderService.js"); //import the addOrder function from the orderservice.js file
 
 const options = {
   origin: "http://localhost:3000", //allow requests from the frontend
